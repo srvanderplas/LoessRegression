@@ -51,14 +51,15 @@ shinyServer(function(input, output) {
     ggplot(loess.data, aes(x = x, y = y)) +
       geom_point(shape = 1, size = 0.5, data = dataset) +
       geom_point(aes(alpha = weight)) +
-      geom_smooth(aes(weight = weight, color = "Local\nregression"),
+      geom_smooth(aes(weight = weight, color = "Local"),
                   method = "lm", formula = reg.formula, se = FALSE) +
       geom_vline(aes(xintercept = input$center), lty = 2) +
       geom_line(aes(y = .fitted, color = "LOESS"), data = fit) +
-      scale_color_manual("", values = c("LOESS" = "red", "Local\nregression" = "blue")) +
-      scale_alpha_continuous("Observation Weight") +
-      theme(legend.position = "bottom", legend.box = "horizontal") +
-      theme(text = element_text(size = 18))
+      scale_color_manual("Regression\nLine", values = c("LOESS" = "red", "Local" = "blue")) +
+      scale_alpha_continuous("Observation\nWeight") +
+      theme(text = element_text(size = 18)) +
+      ylim(c(-3, 6)) +
+      xlim(c(-0.5, 10.5))
 
   }, width = "auto", height = 600)
 
