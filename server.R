@@ -21,7 +21,7 @@ dataset <- data_frame(
 
 shinyServer(function(input, output) {
 
-  output$loessPlot <- reactivePlot({
+  output$loessPlot <- renderPlot({
     mod <- loess(
       y ~ x, # formula
       degree = input$degree, span = input$span,
@@ -35,7 +35,7 @@ shinyServer(function(input, output) {
       filter(rank(dist) / n() <= input$span) %>%
       mutate(weight = (1 - (dist / max(dist)) ^ 3) ^ 3)
 
-    reg.formula <- ifelse(input$degree == 1, "y~x", "y~x*x") %>%
+    reg.formula <- ifelse(input$degree == 1, "y~x", "y~poly(x, 2)") %>%
       formula()
 
     ggplot(loess.data, aes(x = x, y = y)) +
