@@ -37,13 +37,14 @@ shinyUI(fluidPage(
         label = "Smoothing Window Location",
         min = 0,
         max = 10,
-        step = 0.2,
+        step = 0.25,
         value = 0,
         animate = animationOptions(
-          interval = 1000,
-          loop = T
+          interval = 2000,
+          loop = F
         )
-      )
+      ),
+      helpText("Click on the 'play' button to start the animation")
     ),
 
     # Show a plot of the generated distribution
