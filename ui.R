@@ -24,6 +24,8 @@ shinyUI(fluidPage(
         selected = 2,
         inline = T
       ),
+      helpText("This controls the polynomial degree of the local regression equations"),
+      br(),
       sliderInput(
         inputId = "span",
         label = "Smoothing Window Size",
@@ -32,6 +34,9 @@ shinyUI(fluidPage(
         step = 0.05,
         value = 0.75
       ),
+      helpText("The window size controls the proportion of the data included in each local regression.
+               Smaller values result in a more 'bumpy' line; larger values produce a smoother line."),
+      br(),
       sliderInput(
         inputId = "center",
         label = "Smoothing Window Location",
