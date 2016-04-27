@@ -21,14 +21,19 @@ dataset <- data_frame(
 
 shinyServer(function(input, output) {
 
-  output$loessPlot <- renderPlot({
-    mod <- loess(
+  mod <- reactive({
+    loess(
       y ~ x, # formula
       degree = input$degree, span = input$span,
       data = dataset
     )
 
-    fit <- augment(mod)
+  })
+
+  output$loessPlot <- renderPlot({
+
+
+    fit <- augment(mod())
 
     loess.data <- dataset %>%
       mutate(dist = abs(x - input$center)) %>%
