@@ -18,7 +18,8 @@ shinyUI(fluidPage(
       radioButtons(
         inputId = "degree",
         label = "Local Regression Type",
-        choices = c("Linear" = 1,
+        choices = c("Intercept-Only" = 0,
+                    "Linear" = 1,
                     "Quadratic" = 2),
         selected = 2,
         inline = T

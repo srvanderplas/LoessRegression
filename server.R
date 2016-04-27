@@ -40,7 +40,12 @@ shinyServer(function(input, output) {
       filter(rank(dist) / n() <= input$span) %>%
       mutate(weight = (1 - (dist / max(dist)) ^ 3) ^ 3)
 
-    reg.formula <- ifelse(input$degree == 1, "y~x", "y~poly(x, 2)") %>%
+    reg.formula <- ifelse(
+      input$degree == 0, "y~1",
+      ifelse(
+        input$degree == 1, "y~x",
+        "y~poly(x, 2)")
+    ) %>%
       formula()
 
     ggplot(loess.data, aes(x = x, y = y)) +
