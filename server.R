@@ -44,6 +44,7 @@ shinyServer(function(input, output) {
       formula()
 
     ggplot(loess.data, aes(x = x, y = y)) +
+      geom_point(shape = 1, size = 0.5, data = dataset) +
       geom_point(aes(alpha = weight)) +
       geom_smooth(aes(weight = weight, color = "Local\nregression"),
                   method = "lm", formula = reg.formula, se = FALSE) +
@@ -52,8 +53,8 @@ shinyServer(function(input, output) {
       scale_color_manual("", values = c("LOESS" = "red", "Local\nregression" = "blue")) +
       scale_alpha_continuous("Observation Weight") +
       theme(legend.position = "bottom", legend.box = "horizontal") +
-      ggtitle("LOESS Regression")
+      theme(text = element_text(size = 18))
 
-  })
+  }, width = "auto", height = 600)
 
 })
