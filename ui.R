@@ -36,8 +36,12 @@ shinyUI(fluidPage(
         label = "Smoothing Window Location",
         min = 0,
         max = 10,
-        step = 0.01,
-        value = 0
+        step = 0.2,
+        value = 0,
+        animate = animationOptions(
+          interval = 1000,
+          loop = T
+        )
       )
     ),
 
